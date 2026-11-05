@@ -39,51 +39,69 @@ export default function AddCourseForm({ instructors }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-8 p-6 bg-white rounded-lg shadow border border-gray-200">
-      <h2 className="text-xl font-bold mb-4 text-gray-800">เพิ่มรายวิชาใหม่ (Course Catalog)</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="p-6 bg-slate-900/90 rounded-2xl shadow-xl border border-red-900/30 backdrop-blur-sm"
+    >
+      <div className="flex items-center gap-2 mb-5">
+        <span className="p-2 rounded-lg bg-red-900/40 text-rose-400">✏️</span>
+        <h2 className="text-lg font-bold text-white">ลงทะเบียนเพิ่มรายวิชาใหม่</h2>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">รหัสวิชา</label>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-rose-300 mb-2">
+            รหัสวิชา
+          </label>
           <input
             type="text"
             required
-            className="w-full border rounded px-3 py-2 text-gray-900"
-            placeholder="เช่น CS103"
+            className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all"
+            placeholder="เช่น CS201"
             value={formData.course_code}
             onChange={(e) => setFormData({ ...formData, course_code: e.target.value })}
           />
         </div>
+
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">ชื่อวิชา</label>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-rose-300 mb-2">
+            ชื่อวิชา
+          </label>
           <input
             type="text"
             required
-            className="w-full border rounded px-3 py-2 text-gray-900"
-            placeholder="เช่น Database Systems"
+            className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all"
+            placeholder="เช่น Web Development"
             value={formData.course_name}
             onChange={(e) => setFormData({ ...formData, course_name: e.target.value })}
           />
         </div>
+
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">หน่วยกิต</label>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-rose-300 mb-2">
+            หน่วยกิต
+          </label>
           <input
             type="number"
             min="1"
             max="6"
             required
-            className="w-full border rounded px-3 py-2 text-gray-900"
+            className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all"
             value={formData.credits}
             onChange={(e) => setFormData({ ...formData, credits: e.target.value })}
           />
         </div>
+
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">ผู้สอน</label>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-rose-300 mb-2">
+            อาจารย์ผู้สอน
+          </label>
           <select
-            className="w-full border rounded px-3 py-2 text-gray-900"
+            className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all"
             value={formData.instructor_id}
             onChange={(e) => setFormData({ ...formData, instructor_id: e.target.value })}
           >
-            <option value="">-- เลือกผู้สอน --</option>
+            <option value="">-- เลือกอาจารย์ผู้สอน --</option>
             {instructors.map((inst) => (
               <option key={inst.id} value={inst.id}>
                 {inst.name}
@@ -92,13 +110,16 @@ export default function AddCourseForm({ instructors }) {
           </select>
         </div>
       </div>
-      <button
-        type="submit"
-        disabled={loading}
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-      >
-        {loading ? 'กำลังบันทึก...' : 'บันทึกวิชา'}
-      </button>
+
+      <div className="mt-6 flex justify-end">
+        <button
+          type="submit"
+          disabled={loading}
+          className="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-semibold rounded-xl shadow-lg shadow-red-900/30 transition-all duration-150 disabled:opacity-50 cursor-pointer"
+        >
+          {loading ? 'กำลังบันทึกข้อมูล...' : '+ บันทึกรายวิชา'}
+        </button>
+      </div>
     </form>
   );
 }
