@@ -2,8 +2,10 @@ import pool from '@/lib/db';
 import AddCourseForm from './add-course-form';
 import { cookies } from 'next/headers';
 
+// บังคับไม่ให้ทำ Static Prerender ตอนบิลด์ เพื่อแก้ปัญหา Error blocking-prerender-dynamic ใน Next.js 16
+export const instant = false;
+
 async function getData() {
-  // บังคับให้เป็น Dynamic Server Render ตอนมี Request จริงเท่านั้น ป้องกัน Error ตอน npm run build ใน Docker
   await cookies();
 
   try {
