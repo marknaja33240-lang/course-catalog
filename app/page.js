@@ -1,7 +1,11 @@
 import pool from '@/lib/db';
 import AddCourseForm from './add-course-form';
+import { cookies } from 'next/headers';
 
 async function getData() {
+  // บังคับให้เป็น Dynamic Server Render ตอนมี Request จริงเท่านั้น ป้องกัน Error ตอน npm run build ใน Docker
+  await cookies();
+
   try {
     const [courses] = await pool.query(`
       SELECT c.id, c.course_code, c.course_name, c.credits, i.name AS instructor_name
